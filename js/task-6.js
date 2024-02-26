@@ -12,28 +12,31 @@ createButton.addEventListener("click", createBoxes);
 destroyButton.addEventListener("click", destroyBoxes);
 
 function createBoxes() {
-  const amount = input.valueAsNumber;
-  if (!amount || amount < 1 || amount > 100) {
+  destroyBoxes(); 
+  const amount = parseInt(input.value); 
+
+  if (isNaN(amount) || amount < 1 || amount > 100) { 
     alert("Please enter a number between 1 and 100");
     return;
   }
 
-  const boxes = [];
-  let size = 16;
+  let size = 30;
 
   for (let i = 0; i < amount; i++) {
     const box = document.createElement("div");
     box.style.width = `${size}px`;
     box.style.height = `${size}px`;
     box.style.backgroundColor = getRandomHexColor();
-    boxes.push(box);
-    size += 32;
+    boxesContainer.appendChild(box);
+    size += 10;
   }
 
-  boxesContainer.append(...boxes);
+  
   input.value = "";
 }
 
 function destroyBoxes() {
   boxesContainer.innerHTML = "";
 }
+
+
